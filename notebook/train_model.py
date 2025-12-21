@@ -16,8 +16,8 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 # ---------- LOAD DATA ----------
 df = pd.read_csv(DATA_PATH)
 
-X = df.drop("AQI", axis=1)
-y = df["AQI"]
+X = df.drop("aqi", axis=1)
+y = df["aqi"]
 
 # ---------- TRAIN ----------
 X_train, X_test, y_train, y_test = train_test_split(
