@@ -13,31 +13,33 @@ MODEL_PATH = os.path.join(MODEL_DIR, "aqi_model.pkl")
 # ---------- CREATE MODEL FOLDER ----------
 os.makedirs(MODEL_DIR, exist_ok=True)
 
-
+# ---------- LOAD DATA ----------
 df = pd.read_csv(DATA_PATH)
+
+# normalize column names
 df.columns = df.columns.str.strip().str.lower()
 
-
-
-# ✅ KEEP ONLY NUMERIC COLUMNS
+# ---------- KEEP ONLY NUMERIC ----------
 df = df.select_dtypes(include=["number"])
 
-X = df.drop(aqi, axis=1)
-y = df[aqi]
+# ---------- FEATURES & TARGET ----------
+X = df.drop("aqi", axis=1)   # ✅ FIX
+y = df["aqi"]                # ✅ FIX
 
-# ---------- TRAIN ----------
+# ---------- TRAIN TEST SPLIT ----------
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
+# ---------- MODEL ----------
 model = RandomForestRegressor(
     n_estimators=100,
     random_state=42
 )
+
 model.fit(X_train, y_train)
 
 # ---------- SAVE MODEL ----------
 joblib.dump(model, MODEL_PATH)
 
 print("✅ Model trained and saved at:", MODEL_PATH)
-
