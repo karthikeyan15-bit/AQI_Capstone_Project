@@ -17,13 +17,13 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 df = pd.read_csv(DATA_PATH)
 df.columns = df.columns.str.strip().str.lower()
 
-TARGET = "aqi"
+
 
 # ✅ KEEP ONLY NUMERIC COLUMNS
 df = df.select_dtypes(include=["number"])
 
-X = df.drop(TARGET, axis=1)
-y = df[TARGET]
+X = df.drop(aqi, axis=1)
+y = df[aqi]
 
 # ---------- TRAIN ----------
 X_train, X_test, y_train, y_test = train_test_split(
