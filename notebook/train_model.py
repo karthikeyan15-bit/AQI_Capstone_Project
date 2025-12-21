@@ -13,11 +13,17 @@ MODEL_PATH = os.path.join(MODEL_DIR, "aqi_model.pkl")
 # ---------- CREATE MODEL FOLDER ----------
 os.makedirs(MODEL_DIR, exist_ok=True)
 
-# ---------- LOAD DATA ----------
-df = pd.read_csv(DATA_PATH)
 
-X = df.drop("aqi", axis=1)
-y = df["aqi"]
+df = pd.read_csv(DATA_PATH)
+df.columns = df.columns.str.strip().str.lower()
+
+TARGET = "aqi"
+
+# ✅ KEEP ONLY NUMERIC COLUMNS
+df = df.select_dtypes(include=["number"])
+
+X = df.drop(TARGET, axis=1)
+y = df[TARGET]
 
 # ---------- TRAIN ----------
 X_train, X_test, y_train, y_test = train_test_split(
