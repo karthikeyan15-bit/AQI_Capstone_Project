@@ -1,0 +1,116 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AQI Prediction Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <!-- TITLE -->
+    <div class="text-center mb-5">
+        <h1 class="main-title">🌍 Air Quality Index Prediction</h1>
+        <p class="subtitle"></p>
+    </div>
+
+    <!-- INPUT SECTION -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="glass-card p-4">
+
+                <h4 class="section-title mb-3">Enter Air Quality Parameters</h4>
+
+                <form id="aqiForm" class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">PM2.5 (µg/m³)</label>
+                        <input type="number" step="any" class="form-control modern-input" id="pm25" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">PM10 (µg/m³)</label>
+                        <input type="number" step="any" class="form-control modern-input" id="pm10" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">NO₂ (µg/m³)</label>
+                        <input type="number" step="any" class="form-control modern-input" id="no2" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">SO₂ (µg/m³)</label>
+                        <input type="number" step="any" class="form-control modern-input" id="so2" required>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">CO (mg/m³)</label>
+                        <input type="number" step="any" class="form-control modern-input" id="co" required>
+                    </div>
+
+                    <div class="col-12 text-center mt-3">
+                        <button class="btn predict-btn px-5 py-2">
+                            🔍 Predict AQI
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT SECTION -->
+    <div class="row justify-content-center mt-5 d-none" id="resultSection">
+
+        <div class="col-lg-10">
+            <div class="glass-card p-4 fade-in">
+
+                <h4 class="section-title mb-4 text-center">Prediction Result</h4>
+
+                <div class="row align-items-center">
+
+                    <!-- AQI VALUE -->
+                    <div class="col-md-4 text-center">
+                        <div id="aqiValue" class="aqi-circle">--</div>
+                        <span id="aqiCategory" class="badge mt-3"></span>
+                    </div>
+
+                    <!-- HEALTH INFO -->
+                    <div class="col-md-4 text-center">
+                        <h5>Health Impact</h5>
+                        <p id="healthText" class="health-text"></p>
+                    </div>
+
+                    <!-- CHART -->
+                    <div class="col-md-4">
+                        <canvas id="aqiChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>

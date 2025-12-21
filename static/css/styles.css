@@ -1,0 +1,78 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    min-height: 100vh;
+}
+
+/* Titles */
+.main-title {
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    color: #444;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Inputs */
+.modern-input {
+    border-radius: 12px;
+    padding: 10px;
+}
+
+/* Button */
+.predict-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.predict-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* AQI Circle */
+.aqi-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: auto;
+}
+
+/* Health text */
+.health-text {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Animation */
+.fade-in {
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
