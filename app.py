@@ -22,7 +22,7 @@ def train_and_save_model():
     # normalize column names
     df.columns = df.columns.str.strip().str.lower()
 
-    TARGET = "aqi"
+    TARGET = "date"
     X = df.drop(TARGET, axis=1)
     y = df[TARGET]
 
