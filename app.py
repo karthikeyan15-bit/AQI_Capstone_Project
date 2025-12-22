@@ -15,14 +15,22 @@ MODEL_PATH = os.path.join(MODEL_DIR, "aqi_model.pkl")
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 
-# ---------------- TRAIN MODEL IF NOT EXISTS ----------------
+# ---------------- TRAIN MODEL (SAFE) ----------------
 def train_and_save_model():
     df = pd.read_csv(DATA_PATH)
 
-    # normalize column names
+    # clean column names
     df.columns = df.columns.str.strip().str.lower()
 
-    TARGET = "date"
+    # 🔥 DROP DATE COLUMN EXPLICITLY
+    if "date" in df.columns:
+        df = df.drop("date", axis=1)
+
+    TARGET = "aqi"
+
+    if TARGET not in df.columns:
+        raise ValueError("AQI column not found in dataset")
+
     X = df.drop(TARGET, axis=1)
     y = df[TARGET]
 
@@ -35,12 +43,13 @@ def train_and_save_model():
         max_depth=10,
         random_state=42
     )
+
     model.fit(X_train, y_train)
 
     joblib.dump(model, MODEL_PATH, compress=3)
     return model
 
-# ---------------- LOAD OR CREATE MODEL ----------------
+# ---------------- LOAD OR TRAIN ----------------
 if not os.path.exists(MODEL_PATH):
     print("🔄 Training model for first time...")
     model = train_and_save_model()
